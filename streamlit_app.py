@@ -1,7 +1,6 @@
 import streamlit as st
 from google import genai
 from google.genai import types
-from google.colab import userdata
 
 ### Load your API Key
 gemini_api_key = st.secrets['MyGeminiKey']# Info: https://docs.streamlit.io/develop/api-reference/connections/st.secrets
