@@ -15,5 +15,5 @@ MODEL = "gemini-3.1-flash-lite"
 # )
 st.write("Press the button to say hello")
 if st.button("Press me!"):
-    st.write(client.models.generate_content(model=MODEL, contents="Say hello in five words.).text")
+    st.write((client.models.generate_content(model=MODEL, contents="Say hello in five words.).text")
 
