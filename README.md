@@ -10,6 +10,22 @@ This repository contains three separate Streamlit apps. Streamlit Community Clou
 
 ---
 
+## 0. Make your own copy of this repository (fork)
+
+Streamlit Community Cloud deploys from **your own** GitHub repository, so first copy this one into your account.
+
+1. Sign in to **[github.com](https://github.com)**. No account yet? Create a free one at **[github.com/signup](https://github.com/signup)**.
+2. Open **https://github.com/elhamod/IS883_2026_Prototype** and click **Fork** (upper-right).
+3. Leave **Owner** as your username and the repository name as it is, then click **Create fork**.
+4. You now have your own copy at `https://github.com/<your-username>/IS883_2026_Prototype`. This is the repository you pick when you deploy (step 2), and the one you edit.
+
+Good to know:
+
+- **Your fork is public**, like this repository. That is one more reason the key never goes in your code.
+- Your edits change your fork only, never the original.
+- If this repository gets updated later, open your fork on GitHub and click **Sync fork → Update branch** to pull the changes in.
+- The first time you use **[share.streamlit.io](https://share.streamlit.io)**, choose **Continue with GitHub** and allow access, so Streamlit can see your fork.
+
 ## 1. Get a free Gemini API key (Gemini apps only)
 
 1. Go to **https://aistudio.google.com/apikey**
@@ -29,7 +45,7 @@ Every app gets its own web address, so you can keep all three running side by si
 1. Go to **[share.streamlit.io](https://share.streamlit.io)** and click **Create app** (upper-right).
 2. Choose **Yup, I have an app**.
 3. Fill in:
-   - **Repository:** your copy of this repository
+   - **Repository:** your fork from step 0, `<your-username>/IS883_2026_Prototype`
    - **Branch:** `main`
    - **Main file path:** copy it from the table above, e.g. `chatbot_app.py`
    - **App URL:** optional, pick a name you will remember
@@ -68,7 +84,8 @@ This is why the Llama app lives in its own folder. **Don't move or rename its fi
 
 | What you see | What to do |
 | --- | --- |
-| `KeyError: 'MyGeminiKey'` or a message about missing secrets | The app's secret is missing or misspelled. **Manage app → ⋮ → Settings → Secrets**. |
+| "No Gemini key found" | The app's secret is missing or misspelled (it must be exactly `MyGeminiKey`). **Manage app → ⋮ → Settings → Secrets**, then refresh. |
+| The repository does not appear in the **Repository** list | You have not forked it yet (step 0), or Streamlit cannot see your GitHub account: sign out of share.streamlit.io and sign back in with **Continue with GitHub**. |
 | `ModuleNotFoundError: No module named 'llama_cpp'` | The Llama file was moved out of `llama_demo/`, so the wrong `requirements.txt` was used. |
 | Packages you listed in `requirements.txt` are not installed | Delete any `uv.lock`, `pyproject.toml`, or `.python-version` in your repo. Community Cloud uses those *instead of* `requirements.txt`. |
 | The Llama app shows "Downloading Llama 3.2 1B…" for a minute or more | Normal. The model downloads from Hugging Face the first time the app starts, and again after it restarts. |

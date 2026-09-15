@@ -3,7 +3,11 @@ from google import genai
 from google.genai import types
 
 ### Load your API Key
-gemini_api_key = st.secrets['MyGeminiKey']# Info: https://docs.streamlit.io/develop/api-reference/connections/st.secrets
+try:
+    gemini_api_key = st.secrets['MyGeminiKey']# Info: https://docs.streamlit.io/develop/api-reference/connections/st.secrets
+except (KeyError, FileNotFoundError):
+    st.error("No Gemini key found. Add `MyGeminiKey` under **Manage app → ⋮ → Settings → Secrets**, then refresh this page.")
+    st.stop()
 client = genai.Client(api_key=gemini_api_key)
 
 MODEL = "gemini-3.1-flash-lite"
