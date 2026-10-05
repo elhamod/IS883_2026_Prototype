@@ -2,17 +2,32 @@ import streamlit as st
 from google import genai
 from google.genai import types
 
-### Load your API Key
+# Load your API Key
 try:
-    gemini_api_key = st.secrets['MyGeminiKey']# Info: https://docs.streamlit.io/develop/api-reference/connections/st.secrets
+    gemini_api_key = st.secrets["MyGeminiKey"]
 except (KeyError, FileNotFoundError):
-    st.error("No Gemini key found. Add `MyGeminiKey` under **Manage app → ⋮ → Settings → Secrets**, then refresh this page.")
+    st.error("No Gemini key found.")
     st.stop()
+
 client = genai.Client(api_key=gemini_api_key)
 
 MODEL = "gemini-3.1-flash-lite"
 
-st.write("Press the button to say hello")
-if st.button("Press me!"):
-    st.write(client.models.generate_content(model=MODEL, contents="Tell me who the president of the USA is").text)
+# Choose response style
+mood = st.radio(
+    "How should Gemini respond?",
+    ["Happy", "Sad"],
+)
 
+st.write("Press the button to ask Gemini")
+
+if st.button("Press me!"):
+    response = client.models.generate_content(
+        model=MODEL,
+        contents=f"""
+        Write a haiku.
+        Respond in a {mood.lower()} tone.
+        """
+    )
+    
+    st.write(response.text)
